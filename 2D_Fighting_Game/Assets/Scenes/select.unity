@@ -996,31 +996,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b4791f37e5dab94d922fd47619ad658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfPlayers: 2
-  plInterfaces:
-  - {activePotrait: {fileID: 0}, previewPotrait: {fileID: 0}, selector: {fileID: 899850257}, charVisPos: {fileID: 676711594}, createdCharacter: {fileID: 0}, activeX: 0, activeY: 0, hitInputOnce: 0, timerToReset: 0, playerBase:
-      playerId: 
-      inputId: 
-      playerType: 0
-      hasCharacter: 0
-      playerPrefab: {fileID: 0}
-      playerStates: {fileID: 0}
-      score: 0
-}
-  - {activePotrait: {fileID: 0}, previewPotrait: {fileID: 0}, selector: {fileID: 2111917761}, charVisPos: {fileID: 1047290647}, createdCharacter: {fileID: 0}, activeX: 1, activeY: 2, hitInputOnce: 0, timerToReset: 0, playerBase:
-      playerId: 
-      inputId: 
-      playerType: 0
-      hasCharacter: 0
-      playerPrefab: {fileID: 0}
-      playerStates: {fileID: 0}
-      score: 0
-}
-  potraitPrefabs: []
-  maxX: 2
-  maxY: 3
-  potraitCanvas: {fileID: 1661704812}
-  bothPlayersSelected: 0
 --- !u!4 &1189308595
 Transform:
   m_ObjectHideFlags: 0
@@ -1535,8 +1510,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.6000061, y: 4}
-  m_SizeDelta: {x: -584.8, y: -96.3}
+  m_AnchoredPosition: {x: 5.399994, y: -17.360184}
+  m_SizeDelta: {x: -584.8, y: -168.8277}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1661704814
 MonoBehaviour:
@@ -1648,7 +1623,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000015259, y: -7.3}
+  m_AnchoredPosition: {x: 7, y: -18}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1866232738
