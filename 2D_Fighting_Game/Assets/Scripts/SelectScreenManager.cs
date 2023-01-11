@@ -26,18 +26,144 @@ public class SelectScreenManager : MonoBehaviour
     {
         return instance;
     }
+
+    void  Awake()
+    {
+        instance = this;
+    }
     #endregion
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        charManager = CharacterManager.GetInstance();
+        numberOfPlayers = charManager.numberOfPlayers;
+
+        charGrid = new PotraitInfo[maxX, maxY];
+
+        int x = 0;
+        int y = 0;
+
+        potraitPrefabs = potraitCanvas.GetComponentsInChildren<PotraitInfo>();
+
+        for (int i = 0; i < potraitPrefabs.Length; i++)
+        {
+            potraitPrefabs[i].posX += x;
+            potraitPrefabs[i].posY += y;
+
+            charGrid[x, y] = potraitPrefabs[i];
+
+            if (x < maxX - 1)
+            {
+                x++;
+            }
+            else
+            {
+                x = 0;
+                y++;
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (!loadLevel)
+        {
+            for (int i = 0; i < plInterfaces.Count; i++)
+            {
+                                if (i < numberOfPlayers)
+                {
+                    if (!charManager.players[i].hasCharacter)
+                    {
+                        plInterfaces[i].playerBase = charManager.players[i];
+
+                        HandleSelectorPosition(plInterfaces[i]);
+                        HandleSelectScreenInput(plInterfaces[i], charManager.players[i].inputId);
+                        HandleCharacterPreview(plInterfaces[i]);
+                    }
+                }
+                else
+                {
+                    charManager.players[i].hasCharacter = true;
+                }
+            }
+        }
+
+        if (bothPlayersSelected)
+        {
+            Debug.Log("loading");
+            StartCoroutine("LoadLevel");
+            LoadLevel = true;
+        }
+        else
+        {
+            if(charManager.players[0].hasCharacter && charManager.players[1].hasCharacter)
+            {
+                bothPlayersSelected = true;
+            }
+        }
+    }
+
+    void HandleSelectScreenInput(PlayerInterfaces Pl, string playerId)
+    {
+        #region Grid Navigation
+
+        float vertical = Input.GetAxis("vertical" + playerId);
+
+        if (vertical != 0)
+        {
+            if (!Pl.hitInputOnce)
+            {
+                if (vertical > 0)
+                {
+                    Pl.activeY = (Pl.activeY > 0) ? Pl.activeY - 1 : maxY -1;
+                }
+                else
+                {
+                    Pl.activeY = (Pl.activeY < maxY - 1) ? Pl.activeY + 1 : 0;
+                }
+
+                Pl.hitInputOnce = true;
+            }
+        }
+
+        float horizontal = Input.GetAxis("Horizontal" + playerId);
+
+
+    }
+
+    void HandleSelectorPosition(PlayerInterfaces Pl)
+    {
+        Pl.selector.SetActive(true);
+
+        Pl.activePotrait = charGrid[Pl.activeX, Pl.activeY];
+
+        Vector2 selectorPosition = Pl.activePotrait.transform.localPosition;
+        selectorPosition = selectorPosition + new Vector2(potraitCanvas.transform.localPosition.x, potraitCanvas.transform.localPosition.y);
+
+        Pl.selector.transform.localPosition = selectorPosition;
+    }
+
+    IEnumerator loadLevel()
+    {
+        for (int i = 0; i < charManager.players.Count; i++)
+        {
+            if(charManager.players[i].playerType == PlayerBase.PlayerType.ai)
+            {
+                if(charManager.players[i].playerPrefab == null)
+                {
+                    int ranValue = Random.Range(0, potraitPrefabs.Length);
+
+                    charManager.players[i].playerPrefab = charManager.returnCharacterWithID(potraitPrefabs[ranValue].characterId).prefab;
+
+                    Debug.Log(potraitPrefabs[ranValue].characterId);
+                }
+            }
+        }
+
+        yield return new WaitForSconds(2);
+        SceneManager.LoadSceneAsync("level", LoadSceneMode.Single);
     }
 
     void HandleCharacterPreview(PlayerInterfaces Pl)
