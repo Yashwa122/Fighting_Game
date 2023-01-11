@@ -40,6 +40,31 @@ public class SelectScreenManager : MonoBehaviour
         
     }
 
+    void HandleCharacterPreview(PlayerInterfaces Pl)
+    {
+        if (Pl.previewPotrait != Pl.activePotrait)
+        {
+            if (Pl.createdCharacter != null)
+            {
+                Destroy(Pl.createdCharacter);
+            }
+
+            GameObject go = Instantiate(
+                CharacterManager.GetInstance().returnCharacterWithID(Pl.activePotrait.characterId).prefab,
+                Pl.charVisPos.position,
+                Quaternion.identity) as GameObject;
+
+            Pl.createdCharacter = go;
+
+            Pl.previewPotrait = Pl.activePotrait;
+
+            if(!string.Equals(Pl.playerBase.playerId, charManager.players[0].playerId))
+            {
+                Pl.createdCharacter.GetComponent<StateManager>().lookRight = false;
+            }
+        }
+    }
+
     [System.Serializable]
     public class PlayerInterfaces
     {
