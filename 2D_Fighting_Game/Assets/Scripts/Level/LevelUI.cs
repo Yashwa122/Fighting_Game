@@ -2,7 +2,8 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class LevelUI : MonoBehaviour {
+public class LevelUI : MonoBehaviour 
+{
 
     public Text AnnouncerTextLine1;
     public Text AnnouncerTextLine2;
