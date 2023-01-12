@@ -41,6 +41,8 @@ public class CharacterManager : MonoBehaviour
     }
 
     public static CharacterManager instance;
+    internal int numberOfPlayers;
+
     public static CharacterManager GetInstance()
     {
         return instance;

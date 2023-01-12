@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class StateManager : MonoBehaviour
 {
+    internal bool lookRight;
+
     // Start is called before the first frame update
     void Start()
     {

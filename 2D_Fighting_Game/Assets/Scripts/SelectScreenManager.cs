@@ -31,6 +31,7 @@ public class SelectScreenManager : MonoBehaviour
     {
         instance = this;
     }
+
     #endregion
 
     // Start is called before the first frame update
@@ -72,8 +73,13 @@ public class SelectScreenManager : MonoBehaviour
         {
             for (int i = 0; i < plInterfaces.Count; i++)
             {
-                                if (i < numberOfPlayers)
+                if (i < numberOfPlayers)
                 {
+                    if(Input.GetButtonUp("Fire2" + charManager.players[i].inputId))
+                    {
+                        plInterfaces[i].playerBase.hasCharacter = false;
+                    }
+
                     if (!charManager.players[i].hasCharacter)
                     {
                         plInterfaces[i].playerBase = charManager.players[i];
@@ -94,7 +100,7 @@ public class SelectScreenManager : MonoBehaviour
         {
             Debug.Log("loading");
             StartCoroutine("LoadLevel");
-            LoadLevel = true;
+            loadLevel = true;
         }
         else
         {
@@ -130,7 +136,47 @@ public class SelectScreenManager : MonoBehaviour
 
         float horizontal = Input.GetAxis("Horizontal" + playerId);
 
+        if (!Pl.hitInputOnce)
+        {
+            if (horizontal > 0)
+            {
+                Pl.activeX = (Pl.activeX > 0) ? Pl.activeX - 1 : maxX - 1;
+            }
+            else
+            {
+                Pl.activeX = (Pl.activeX < maxX - 1) ? Pl.activeX + 1 : 0;
+            }
 
+            Pl.timerToReset = 0;
+            Pl.hitInputOnce = true;
+        }
+
+        if(vertical == 0 && horizontal == 0)
+        {
+            Pl.hitInputOnce = false;
+        }
+
+        if (Pl.hitInputOnce)
+        {
+            Pl.timerToReset += Time.deltaTime;
+
+            if(Pl.timerToReset > 0.8f)
+            {
+                Pl.hitInputOnce = false;
+                Pl.timerToReset = 0;
+            }
+        }
+
+        #endregion
+
+        if (Input.GetButtonUp("Fire1" + playerId))
+        {
+            Pl.createdCharacter.GetComponentInChildren<Animator>().Play("Kick");
+
+            Pl.playerBase.playerPrefab = charManager.returnCharacterWithID(Pl.activePotrait.characterId).prefab;
+
+            Pl.playerBase.hasCharacter = true;
+        }
     }
 
     void HandleSelectorPosition(PlayerInterfaces Pl)
@@ -145,7 +191,7 @@ public class SelectScreenManager : MonoBehaviour
         Pl.selector.transform.localPosition = selectorPosition;
     }
 
-    IEnumerator loadLevel()
+    IEnumerator LoadLevel()
     {
         for (int i = 0; i < charManager.players.Count; i++)
         {
@@ -162,7 +208,7 @@ public class SelectScreenManager : MonoBehaviour
             }
         }
 
-        yield return new WaitForSconds(2);
+        yield return new WaitForSeconds(2);
         SceneManager.LoadSceneAsync("level", LoadSceneMode.Single);
     }
 
