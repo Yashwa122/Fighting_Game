@@ -21,6 +21,6 @@ public class HandleMovementCollider : StateMachineBehaviour
         if (states == null)
             states = animator.transform.GetComponentInParent<StateManager>();
 
-        states.OpenMovementColliders(index);
+        states.OpenMovementCollider(index);
     }
 }

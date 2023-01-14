@@ -479,6 +479,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 108232, guid: cd7178b38f9baf047b66ccbf8a509bd2, type: 3}
+      propertyPath: m_Name
+      value: CharacterManager
+      objectReference: {fileID: 0}
     - target: {fileID: 475202, guid: cd7178b38f9baf047b66ccbf8a509bd2, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -511,56 +515,20 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11464690, guid: cd7178b38f9baf047b66ccbf8a509bd2, type: 3}
-      propertyPath: players.Array.data[0].inputId
-      value: 
+    - target: {fileID: 475202, guid: cd7178b38f9baf047b66ccbf8a509bd2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11464690, guid: cd7178b38f9baf047b66ccbf8a509bd2, type: 3}
-      propertyPath: players.Array.data[1].inputId
-      value: 1
+    - target: {fileID: 475202, guid: cd7178b38f9baf047b66ccbf8a509bd2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 475202, guid: cd7178b38f9baf047b66ccbf8a509bd2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd7178b38f9baf047b66ccbf8a509bd2, type: 3}
---- !u!1 &317923009 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 108232, guid: cd7178b38f9baf047b66ccbf8a509bd2, type: 3}
-  m_PrefabInstance: {fileID: 317923008}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &317923010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 317923009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40183c63dd196c745ba23304df816668, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numberOfUsers: 0
-  players:
-  - playerId: Player 1
-    inputId: 
-    playerType: 0
-    hasCharacter: 0
-    playerPrefab: {fileID: 126410, guid: 5eb09603fd896ed4bb16435d222ab45a, type: 3}
-    playerStates: {fileID: 0}
-    score: 0
-  - playerId: Player 2
-    inputId: i
-    playerType: 0
-    hasCharacter: 0
-    playerPrefab: {fileID: 126410, guid: e1c74d60603d8eb4cafd4770026b1f6b, type: 3}
-    playerStates: {fileID: 0}
-    score: 0
-  characterList:
-  - charId: 
-    prefab: {fileID: 126410, guid: 5eb09603fd896ed4bb16435d222ab45a, type: 3}
-  - charId: 
-    prefab: {fileID: 126410, guid: e1c74d60603d8eb4cafd4770026b1f6b, type: 3}
-  - charId: 
-    prefab: {fileID: 126410, guid: 7caa66545a9f808499f1f1e0e274cfc8, type: 3}
 --- !u!1 &397099513
 GameObject:
   m_ObjectHideFlags: 0
